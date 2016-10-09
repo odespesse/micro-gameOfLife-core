@@ -1,6 +1,5 @@
 package fr.olived19.microgameoflife.core;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class TestStable {
         expected.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead));
-        assertGridsEquals(newGeneration, expected);
+        TestHelper.assertGridsEquals(newGeneration, expected);
     }
 
     @Test
@@ -42,7 +41,7 @@ public class TestStable {
         expected.add(Arrays.asList(Cell.dead, Cell.alive, Cell.dead,  Cell.dead,  Cell.alive, Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.alive, Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        assertGridsEquals(newGeneration, expected);
+        TestHelper.assertGridsEquals(newGeneration, expected);
     }
 
     @Test
@@ -63,7 +62,7 @@ public class TestStable {
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.dead,  Cell.alive, Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.alive, Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        assertGridsEquals(newGeneration, expected);
+        TestHelper.assertGridsEquals(newGeneration, expected);
     }
 
     @Test
@@ -82,18 +81,6 @@ public class TestStable {
         expected.add(Arrays.asList(Cell.dead, Cell.alive, Cell.dead,  Cell.alive, Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        assertGridsEquals(newGeneration, expected);
-    }
-
-    private void assertGridsEquals(List<List<Cell>> newGeneration, List<List<Cell>> expected) {
-        Assert.assertEquals(newGeneration.size(), expected.size());
-        for (int i = 0 ; i < expected.size(); i++) {
-            List<Cell> expectedRow = expected.get(i);
-            List<Cell> actualRow = newGeneration.get(i);
-            Assert.assertEquals(actualRow, expectedRow);
-            for (int j = 0; j < expectedRow.size(); j++) {
-                Assert.assertEquals(actualRow.get(j), expectedRow.get(j));
-            }
-        }
+        TestHelper.assertGridsEquals(newGeneration, expected);
     }
 }
