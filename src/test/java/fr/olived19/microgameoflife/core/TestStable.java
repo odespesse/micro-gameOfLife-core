@@ -9,6 +9,18 @@ import java.util.List;
 public class TestStable {
 
     @Test
+    public void mono() {
+        List<List<Cell>> seed = new ArrayList<>();
+        seed.add(Arrays.asList(Cell.dead));
+        Grid gridSeed = new Grid(seed);
+        Automaton automaton = new Automaton();
+        Grid newGeneration = automaton.createNextGeneration(gridSeed);
+        List<List<Cell>> expected = new ArrayList<>();
+        expected.add(Arrays.asList(Cell.dead));
+        TestHelper.assertGridsEquals(newGeneration.asList(), expected);
+    }
+
+    @Test
     public void block() {
         List<List<Cell>> seed = new ArrayList<>();
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead));
