@@ -4,59 +4,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Automaton {
-    public List<List<Cell>> createNextGeneration(List<List<Cell>> gridSeed) {
-        List<List<Cell>> gridNextGeneration = new ArrayList<>();
-        for(int rowIndex = 0; rowIndex < gridSeed.size() ; rowIndex++) {
-            List<Cell> currentRow = gridSeed.get(rowIndex);
-            List<Cell> rowNextGeneration = new ArrayList<>();
-            for (int columnIndex = 0; columnIndex < currentRow.size(); columnIndex++) {
-                Cell currentCell = currentRow.get(columnIndex);
-                int nbColumns = currentRow.size();
-                int nbAliveNeighbourhood = this.countAliveMooreNeighbourhood(gridSeed, rowIndex, columnIndex, nbColumns);
-                Cell cellNextGeneration = Cell.dead;
-                if (currentCell == Cell.alive && (nbAliveNeighbourhood == 2 || nbAliveNeighbourhood == 3)) {
-                    cellNextGeneration = Cell.alive;
-                }
-                if (currentCell == Cell.dead && nbAliveNeighbourhood == 3) {
-                    cellNextGeneration = Cell.alive;
-                }
-                rowNextGeneration.add(cellNextGeneration);
-            }
-            gridNextGeneration.add(rowNextGeneration);
+    public Grid createNextGeneration(Grid gridSeed) {
+        List<List<Cell>> nextGeneration = new ArrayList<>();
+        for(int rowIndex = 0; rowIndex < gridSeed.rowCount() ; rowIndex++) {
+            List<Cell> currentRow = gridSeed.getRowAt(rowIndex);
+            List<Cell> rowNextGeneration = this.createNewRow(gridSeed, rowIndex, currentRow);
+            nextGeneration.add(rowNextGeneration);
         }
-        return gridNextGeneration;
+        return new Grid(nextGeneration);
     }
 
-    private int countAliveMooreNeighbourhood(List<List<Cell>> gridSeed, int rowIndex, int columnIndex, int nbColumns) {
+    private List<Cell> createNewRow(Grid gridSeed, int rowIndex, List<Cell> currentRow) {
+        List<Cell> rowNextGeneration = new ArrayList<>();
+        for (int cellIndex = 0; cellIndex < currentRow.size(); cellIndex++) {
+            Cell currentCell = currentRow.get(cellIndex);
+            int nbAliveNeighbourhood = this.countAliveMooreNeighbourhood(gridSeed, rowIndex, cellIndex);
+            Cell cellNextGeneration = this.transformCellState(currentCell, nbAliveNeighbourhood);
+            rowNextGeneration.add(cellNextGeneration);
+        }
+        return rowNextGeneration;
+    }
+
+    private int countAliveMooreNeighbourhood(Grid gridSeed, int rowIndex, int cellIndex) {
         int nbAliveCells = 0;
-        if (rowIndex > 0) {
-            if (columnIndex > 0 && gridSeed.get(rowIndex - 1).get(columnIndex - 1) == Cell.alive) {
-                nbAliveCells++;
-            }
-            if (gridSeed.get(rowIndex - 1).get(columnIndex) == Cell.alive) {
-                nbAliveCells++;
-            }
-            if ((columnIndex < nbColumns - 1) && gridSeed.get(rowIndex - 1).get(columnIndex + 1 ) == Cell.alive) {
-                nbAliveCells++;
-            }
-        }
-        if (columnIndex > 0 && gridSeed.get(rowIndex).get(columnIndex-1) == Cell.alive) {
+        if (gridSeed.getCellAt(rowIndex - 1, cellIndex - 1).isAlive()) {
             nbAliveCells++;
         }
-        if ((columnIndex < nbColumns - 1) && gridSeed.get(rowIndex).get(columnIndex + 1) == Cell.alive) {
+        if (gridSeed.getCellAt(rowIndex - 1, cellIndex).isAlive()) {
             nbAliveCells++;
         }
-        if (rowIndex < gridSeed.size() - 1) {
-            if (columnIndex > 0 && gridSeed.get(rowIndex+1).get(columnIndex - 1) == Cell.alive) {
-                nbAliveCells++;
-            }
-            if (gridSeed.get(rowIndex + 1).get(columnIndex) == Cell.alive) {
-                nbAliveCells++;
-            }
-            if ((columnIndex < nbColumns - 1) && gridSeed.get(rowIndex+1).get(columnIndex + 1) == Cell.alive) {
-                nbAliveCells++;
-            }
+        if (gridSeed.getCellAt(rowIndex - 1, cellIndex + 1 ).isAlive()) {
+            nbAliveCells++;
+        }
+        if (gridSeed.getCellAt(rowIndex, cellIndex - 1).isAlive()) {
+            nbAliveCells++;
+        }
+        if (gridSeed.getCellAt(rowIndex, cellIndex + 1).isAlive()) {
+            nbAliveCells++;
+        }
+        if (gridSeed.getCellAt(rowIndex + 1, cellIndex - 1).isAlive()) {
+            nbAliveCells++;
+        }
+        if (gridSeed.getCellAt(rowIndex + 1, cellIndex).isAlive()) {
+            nbAliveCells++;
+        }
+        if (gridSeed.getCellAt(rowIndex + 1, cellIndex + 1).isAlive()) {
+            nbAliveCells++;
         }
         return nbAliveCells;
+    }
+
+    private Cell transformCellState(Cell currentCell, int nbAliveNeighbourhood) {
+        Cell cellNextGeneration = Cell.dead;
+        if (currentCell.isAlive() && (nbAliveNeighbourhood == 2 || nbAliveNeighbourhood == 3)) {
+            cellNextGeneration = Cell.alive;
+        }
+        if (currentCell.isDead() && nbAliveNeighbourhood == 3) {
+            cellNextGeneration = Cell.alive;
+        }
+        return cellNextGeneration;
     }
 }
