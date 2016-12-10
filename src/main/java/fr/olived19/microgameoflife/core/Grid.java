@@ -5,13 +5,16 @@ import java.util.List;
 public class Grid {
 
     private List<List<Cell>> grid = null;
+    private int generation;
 
-    public Grid(List<List<Cell>> gridSeed) {
+    public Grid(List<List<Cell>> gridSeed, int generation) {
         this.grid = gridSeed;
+        this.generation = generation;
     }
 
     public Grid(Grid gridSeed) {
         this.grid = gridSeed.asList();
+        this.generation = gridSeed.getGeneration();
     }
 
     public int rowCount() {
@@ -34,5 +37,9 @@ public class Grid {
 
     public List<List<Cell>> asList() {
         return grid;
+    }
+
+    public int getGeneration() {
+        return generation;
     }
 }

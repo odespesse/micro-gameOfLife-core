@@ -11,7 +11,8 @@ public class Automaton {
             List<Cell> rowNextGeneration = this.createNewRow(gridSeed, rowIndex, currentRow);
             nextGeneration.add(rowNextGeneration);
         }
-        return new Grid(nextGeneration);
+        int seedGeneration = gridSeed.getGeneration();
+        return new Grid(nextGeneration, ++seedGeneration);
     }
 
     private List<Cell> createNewRow(Grid gridSeed, int rowIndex, List<Cell> currentRow) {
