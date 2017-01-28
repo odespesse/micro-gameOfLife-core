@@ -4,65 +4,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Automaton {
-    public Grid createNextGeneration(Grid gridSeed) {
-        List<List<Cell>> nextGeneration = new ArrayList<>();
-        for(int rowIndex = 0; rowIndex < gridSeed.rowCount() ; rowIndex++) {
-            List<Cell> currentRow = gridSeed.getRowAt(rowIndex);
-            List<Cell> rowNextGeneration = this.createNewRow(gridSeed, rowIndex, currentRow);
-            nextGeneration.add(rowNextGeneration);
+    public World createNextGeneration(World world) {
+        List<List<Cell>> nextGrid = new ArrayList<>();
+        for(int rowIndex = 0; rowIndex < world.rowCount() ; rowIndex++) {
+            List<Cell> currentRow = world.getRowAt(rowIndex);
+            List<Cell> nextRow = this.createNewRow(world, rowIndex, currentRow);
+            nextGrid.add(nextRow);
         }
-        int seedGeneration = gridSeed.getGeneration();
-        return new Grid(nextGeneration, ++seedGeneration);
+        int currentGeneration = world.getGeneration();
+        return new World(nextGrid, ++currentGeneration);
     }
 
-    private List<Cell> createNewRow(Grid gridSeed, int rowIndex, List<Cell> currentRow) {
-        List<Cell> rowNextGeneration = new ArrayList<>();
+    private List<Cell> createNewRow(World world, int rowIndex, List<Cell> currentRow) {
+        List<Cell> nextRow = new ArrayList<>();
         for (int cellIndex = 0; cellIndex < currentRow.size(); cellIndex++) {
             Cell currentCell = currentRow.get(cellIndex);
-            int nbAliveNeighbourhood = this.countAliveMooreNeighbourhood(gridSeed, rowIndex, cellIndex);
+            int nbAliveNeighbourhood = this.countAliveMooreNeighbourhood(world, rowIndex, cellIndex);
             Cell cellNextGeneration = this.transformCellState(currentCell, nbAliveNeighbourhood);
-            rowNextGeneration.add(cellNextGeneration);
+            nextRow.add(cellNextGeneration);
         }
-        return rowNextGeneration;
+        return nextRow;
     }
 
-    private int countAliveMooreNeighbourhood(Grid gridSeed, int rowIndex, int cellIndex) {
+    private int countAliveMooreNeighbourhood(World world, int rowIndex, int cellIndex) {
         int nbAliveCells = 0;
-        if (gridSeed.getCellAt(rowIndex - 1, cellIndex - 1).isAlive()) {
+        if (world.getCellAt(rowIndex - 1, cellIndex - 1).isAlive()) {
             nbAliveCells++;
         }
-        if (gridSeed.getCellAt(rowIndex - 1, cellIndex).isAlive()) {
+        if (world.getCellAt(rowIndex - 1, cellIndex).isAlive()) {
             nbAliveCells++;
         }
-        if (gridSeed.getCellAt(rowIndex - 1, cellIndex + 1 ).isAlive()) {
+        if (world.getCellAt(rowIndex - 1, cellIndex + 1 ).isAlive()) {
             nbAliveCells++;
         }
-        if (gridSeed.getCellAt(rowIndex, cellIndex - 1).isAlive()) {
+        if (world.getCellAt(rowIndex, cellIndex - 1).isAlive()) {
             nbAliveCells++;
         }
-        if (gridSeed.getCellAt(rowIndex, cellIndex + 1).isAlive()) {
+        if (world.getCellAt(rowIndex, cellIndex + 1).isAlive()) {
             nbAliveCells++;
         }
-        if (gridSeed.getCellAt(rowIndex + 1, cellIndex - 1).isAlive()) {
+        if (world.getCellAt(rowIndex + 1, cellIndex - 1).isAlive()) {
             nbAliveCells++;
         }
-        if (gridSeed.getCellAt(rowIndex + 1, cellIndex).isAlive()) {
+        if (world.getCellAt(rowIndex + 1, cellIndex).isAlive()) {
             nbAliveCells++;
         }
-        if (gridSeed.getCellAt(rowIndex + 1, cellIndex + 1).isAlive()) {
+        if (world.getCellAt(rowIndex + 1, cellIndex + 1).isAlive()) {
             nbAliveCells++;
         }
         return nbAliveCells;
     }
 
     private Cell transformCellState(Cell currentCell, int nbAliveNeighbourhood) {
-        Cell cellNextGeneration = Cell.dead;
+        Cell cellWithNextState = Cell.dead;
         if (currentCell.isAlive() && (nbAliveNeighbourhood == 2 || nbAliveNeighbourhood == 3)) {
-            cellNextGeneration = Cell.alive;
+            cellWithNextState = Cell.alive;
         }
         if (currentCell.isDead() && nbAliveNeighbourhood == 3) {
-            cellNextGeneration = Cell.alive;
+            cellWithNextState = Cell.alive;
         }
-        return cellNextGeneration;
+        return cellWithNextState;
     }
 }

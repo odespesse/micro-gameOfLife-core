@@ -13,12 +13,12 @@ public class TestStable {
     public void mono() {
         List<List<Cell>> seed = new ArrayList<>();
         seed.add(Arrays.asList(Cell.dead));
-        Grid gridSeed = new Grid(seed, 10);
+        World worldSeed = new World(seed, 10);
         Automaton automaton = new Automaton();
-        Grid newGeneration = automaton.createNextGeneration(gridSeed);
+        World newGeneration = automaton.createNextGeneration(worldSeed);
         List<List<Cell>> expected = new ArrayList<>();
         expected.add(Arrays.asList(Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration.asList(), expected);
+        TestHelper.assertGridsEquals(newGeneration.getGridAsList(), expected);
         Assert.assertEquals(newGeneration.getGeneration(), 11);
     }
 
@@ -29,15 +29,15 @@ public class TestStable {
         seed.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead));
-        Grid gridSeed = new Grid(seed, 0);
+        World worldSeed = new World(seed, 0);
         Automaton automaton = new Automaton();
-        Grid newGeneration = automaton.createNextGeneration(gridSeed);
+        World newGeneration = automaton.createNextGeneration(worldSeed);
         List<List<Cell>> expected = new ArrayList<>();
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration.asList(), expected);
+        TestHelper.assertGridsEquals(newGeneration.getGridAsList(), expected);
         Assert.assertEquals(newGeneration.getGeneration(), 1);
     }
 
@@ -49,16 +49,16 @@ public class TestStable {
         seed.add(Arrays.asList(Cell.dead, Cell.alive, Cell.dead,  Cell.dead,  Cell.alive, Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.alive, Cell.dead,  Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        Grid gridSeed = new Grid(seed, 0);
+        World worldSeed = new World(seed, 0);
         Automaton automaton = new Automaton();
-        Grid newGeneration = automaton.createNextGeneration(gridSeed);
+        World newGeneration = automaton.createNextGeneration(worldSeed);
         List<List<Cell>> expected = new ArrayList<>();
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.alive, Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.alive, Cell.dead,  Cell.dead,  Cell.alive, Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.alive, Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration.asList(), expected);
+        TestHelper.assertGridsEquals(newGeneration.getGridAsList(), expected);
         Assert.assertEquals(newGeneration.getGeneration(), 1);
     }
 
@@ -71,9 +71,9 @@ public class TestStable {
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.dead,  Cell.alive, Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.alive, Cell.dead,  Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        Grid gridSeed = new Grid(seed, 0);
+        World worldSeed = new World(seed, 0);
         Automaton automaton = new Automaton();
-        Grid newGeneration = automaton.createNextGeneration(gridSeed);
+        World newGeneration = automaton.createNextGeneration(worldSeed);
         List<List<Cell>> expected = new ArrayList<>();
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.alive, Cell.dead,  Cell.dead));
@@ -81,7 +81,7 @@ public class TestStable {
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.dead,  Cell.alive, Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.alive, Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration.asList(), expected);
+        TestHelper.assertGridsEquals(newGeneration.getGridAsList(), expected);
         Assert.assertEquals(newGeneration.getGeneration(), 1);
     }
 
@@ -93,16 +93,16 @@ public class TestStable {
         seed.add(Arrays.asList(Cell.dead, Cell.alive, Cell.dead,  Cell.alive, Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.dead,  Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        Grid gridSeed = new Grid(seed, 0);
+        World worldSeed = new World(seed, 0);
         Automaton automaton = new Automaton();
-        Grid newGeneration = automaton.createNextGeneration(gridSeed);
+        World newGeneration = automaton.createNextGeneration(worldSeed);
         List<List<Cell>> expected = new ArrayList<>();
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.alive, Cell.dead,  Cell.alive, Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.dead,  Cell.dead));
         expected.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration.asList(), expected);
+        TestHelper.assertGridsEquals(newGeneration.getGridAsList(), expected);
         Assert.assertEquals(newGeneration.getGeneration(), 1);
     }
 }

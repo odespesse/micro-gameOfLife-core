@@ -2,19 +2,19 @@ package fr.olived19.microgameoflife.core;
 
 import java.util.List;
 
-public class Grid {
+public class World {
 
     private List<List<Cell>> grid = null;
     private int generation;
 
-    public Grid(List<List<Cell>> gridSeed, int generation) {
-        this.grid = gridSeed;
+    public World(List<List<Cell>> grid, int generation) {
+        this.grid = grid;
         this.generation = generation;
     }
 
-    public Grid(Grid gridSeed) {
-        this.grid = gridSeed.asList();
-        this.generation = gridSeed.getGeneration();
+    public World(World world) {
+        this.grid = world.getGridAsList();
+        this.generation = world.getGeneration();
     }
 
     public int rowCount() {
@@ -35,7 +35,7 @@ public class Grid {
         return this.grid.get(rowIndex).get(columnIndex);
     }
 
-    public List<List<Cell>> asList() {
+    public List<List<Cell>> getGridAsList() {
         return grid;
     }
 

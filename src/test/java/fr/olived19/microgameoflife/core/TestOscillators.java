@@ -17,26 +17,26 @@ public class TestOscillators {
         seed.add(Arrays.asList(Cell.dead, Cell.dead, Cell.alive, Cell.dead, Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead, Cell.alive, Cell.dead, Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead, Cell.dead,  Cell.dead, Cell.dead));
-        Grid seedGrid = new Grid(seed, 0);
+        World seedWorld = new World(seed, 0);
         Automaton automaton = new Automaton();
-        Grid newGeneration1 = automaton.createNextGeneration(seedGrid);
+        World newGeneration1 = automaton.createNextGeneration(seedWorld);
         List<List<Cell>> expectedGrid1 = new ArrayList<>();
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.alive, Cell.dead));
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration1.asList(), expectedGrid1);
+        TestHelper.assertGridsEquals(newGeneration1.getGridAsList(), expectedGrid1);
         Assert.assertEquals(newGeneration1.getGeneration(), 1);
-        Grid gridNewGeneration1 = new Grid(newGeneration1);
-        Grid newGeneration2 = automaton.createNextGeneration(gridNewGeneration1);
+        World worldNewGeneration1 = new World(newGeneration1);
+        World newGeneration2 = automaton.createNextGeneration(worldNewGeneration1);
         List<List<Cell>> expectedGrid2 = new ArrayList<>();
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead, Cell.dead,  Cell.dead, Cell.dead));
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead, Cell.alive, Cell.dead, Cell.dead));
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead, Cell.alive, Cell.dead, Cell.dead));
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead, Cell.alive, Cell.dead, Cell.dead));
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead, Cell.dead,  Cell.dead, Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration2.asList(), expectedGrid2);
+        TestHelper.assertGridsEquals(newGeneration2.getGridAsList(), expectedGrid2);
         Assert.assertEquals(newGeneration2.getGeneration(), 2);
     }
 
@@ -49,9 +49,9 @@ public class TestOscillators {
         seed.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.alive, Cell.dead,  Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        Grid gridSeed = new Grid(seed, 0);
+        World worldSeed = new World(seed, 0);
         Automaton automaton = new Automaton();
-        Grid newGeneration1 = automaton.createNextGeneration(gridSeed);
+        World newGeneration1 = automaton.createNextGeneration(worldSeed);
         List<List<Cell>> expectedGrid1 = new ArrayList<>();
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.alive, Cell.dead,  Cell.dead));
@@ -59,10 +59,10 @@ public class TestOscillators {
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.alive, Cell.dead,  Cell.dead,  Cell.alive, Cell.dead));
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.alive, Cell.dead,  Cell.dead,  Cell.dead));
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration1.asList(), expectedGrid1);
+        TestHelper.assertGridsEquals(newGeneration1.getGridAsList(), expectedGrid1);
         Assert.assertEquals(newGeneration1.getGeneration(), 1);
-        Grid gridNewGeneration1 = new Grid(newGeneration1);
-        Grid newGeneration2 = automaton.createNextGeneration(gridNewGeneration1);
+        World worldNewGeneration1 = new World(newGeneration1);
+        World newGeneration2 = automaton.createNextGeneration(worldNewGeneration1);
         List<List<Cell>> expectedGrid2 = new ArrayList<>();
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
@@ -70,7 +70,7 @@ public class TestOscillators {
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.alive, Cell.dead,  Cell.dead));
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration2.asList(), expectedGrid2);
+        TestHelper.assertGridsEquals(newGeneration2.getGridAsList(), expectedGrid2);
         Assert.assertEquals(newGeneration2.getGeneration(), 2);
     }
 
@@ -83,9 +83,9 @@ public class TestOscillators {
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.alive, Cell.alive, Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.alive, Cell.alive, Cell.dead));
         seed.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        Grid gridSeed = new Grid(seed, 0);
+        World worldSeed = new World(seed, 0);
         Automaton automaton = new Automaton();
-        Grid newGeneration1 = automaton.createNextGeneration(gridSeed);
+        World newGeneration1 = automaton.createNextGeneration(worldSeed);
         List<List<Cell>> expectedGrid1 = new ArrayList<>();
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.dead,  Cell.dead,  Cell.dead));
@@ -93,10 +93,10 @@ public class TestOscillators {
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.alive, Cell.dead));
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.alive, Cell.alive, Cell.dead));
         expectedGrid1.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration1.asList(), expectedGrid1);
+        TestHelper.assertGridsEquals(newGeneration1.getGridAsList(), expectedGrid1);
         Assert.assertEquals(newGeneration1.getGeneration(), 1);
-        Grid gridNewGeneration1 = new Grid(newGeneration1);
-        Grid newGeneration2 = automaton.createNextGeneration(gridNewGeneration1);
+        World worldNewGeneration1 = new World(newGeneration1);
+        World newGeneration2 = automaton.createNextGeneration(worldNewGeneration1);
         List<List<Cell>> expectedGrid2 = new ArrayList<>();
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.alive, Cell.alive, Cell.dead,  Cell.dead,  Cell.dead));
@@ -104,7 +104,7 @@ public class TestOscillators {
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.alive, Cell.alive, Cell.dead));
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.alive, Cell.alive, Cell.dead));
         expectedGrid2.add(Arrays.asList(Cell.dead, Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead,  Cell.dead));
-        TestHelper.assertGridsEquals(newGeneration2.asList(), expectedGrid2);
+        TestHelper.assertGridsEquals(newGeneration2.getGridAsList(), expectedGrid2);
         Assert.assertEquals(newGeneration2.getGeneration(), 2);
     }
 }
